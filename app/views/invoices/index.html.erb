@@ -1,6 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Invoices</h1>
+<div class="row">
+  <h1>Listing Invoices</h1>
+  <div class="pull-right range-query">
+    <%= form_tag invoices_path, :method=> :get do %>
+      <%= text_field_tag 'date[from]', @search.date_from %>
+      <%= text_field_tag 'date[to]', @search.date_to %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </div>
+</div>
 
 <div class="media">
   <div class="media-body">
@@ -16,9 +25,9 @@
       </thead>
 
       <tbody>
-        <% @invoices.each do |invoice| %>
+        <% @invoice.each do |invoice| %>
           <tr>
-            <td><%= invoice.date %></td>
+            <td><%= invoice.date.strftime("%Y-%m-%d") %></td>
             <td><%= invoice.company %></td>
             <td><%= invoice.tax %></td>
             <td><%= invoice.salesperson %></td>
